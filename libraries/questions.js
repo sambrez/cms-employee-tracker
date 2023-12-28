@@ -1,7 +1,7 @@
 const questions = [
     {
         type: 'checkbox',
-        name: 'prompt',
+        name: 'init',
         message: 'What would you like to do?',
         choices: [
             'View all departments',
@@ -12,10 +12,10 @@ const questions = [
             'Add employee',
             'Update employee role'
         ],
-        validate: function(prompt) {
-            if (prompt.length > 1) {
+        validate: function(init) {
+            if (init.length > 1) {
                 return 'Error: Too many selections.';
-            } else if (text.length < 1) {
+            } else if (init.length < 1) {
                 return 'Error: Nothing selected';
             } else {
                 return true;
@@ -103,7 +103,7 @@ const questions = [
     {
         type: 'checkbox',
         name: 'role_id',
-        message: "Which is this employee's role?",
+        message: "What's the employee's role?",
         choices: function() {
             let arr = [];
             // for loop over role
@@ -122,5 +122,37 @@ const questions = [
         type: 'input',
         name: 'manager',
         message: "Which manager does this employee report to?",
+    },
+    {
+        type: 'input',
+        name: 'employee_id',
+        message: "Enter the employee id.",
+        validate: function(employee_id) {
+            for (let i = 0; i < db.employees.id; i++) {
+                if (employee_id === db.employee_id[i]) {
+                 return true;
+                } else {
+                    return 'Error: employee not found.'
+                }
+            }
+        }
+    },
+    {
+        type: 'checkbox',
+        name: 'updated_role',
+        message: "What's the employee's new role?",
+        choices: function() {
+            let arr = [];
+            // for loop over roles
+        },
+        validate: function(updated_role) {
+            if (updated_role.length > 1) {
+                return 'Error: Please select a single role.';
+            } else if (updated_role.length < 1) {
+                return 'Error: Please select a role.';
+            } else {
+                return true;
+            }
+        }
     },
 ]
