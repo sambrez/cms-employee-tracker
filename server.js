@@ -10,4 +10,3 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the company_db database.`)
 );
-

@@ -1,19 +1,94 @@
 INSERT INTO departments (id, department_name)
-VALUES (001, "Administration");
-       (002, "Bakery"),
-       (003, "Butchery"),
-       (004, "Dairy"),
-       (005, "Deli"),
-       (006, "Grocery"),
-       (007, "Maintenance"),
-       (008, "Pharmacy"),
-       (009, "Produce"),
-       (010, "Sales");
+VALUES (0001, "Administration");
+       (0002, "Bakery"),
+       (0003, "Butchery"),
+       (0004, "Dairy"),
+       (0005, "Deli"),
+       (0006, "Grocery"),
+       (0007, "Maintenance"),
+       (0008, "Pharmacy"),
+       (0009, "Produce"),
+       (0010, "Sales");
 
 INSERT INTO roles (id, role_title, role_salary, department_id)
-VALUES (01, "", , );
+VALUES (001, "Store Manager", 100000, 0001);
+       (002, "Assistant Store Manager", 85000, 0001),
+       (003, "Finances Manager", 80000, 0001),
+       (004, "Human Resources Manager", 80000, 0001),
+       (005, "Bakery Manager", 70000, 0002),
+       (006, "Baker", 50000, 0002),
+       (007, "Meats Manager", 70000, 0003),
+       (008, "Butcher", 60000, 0003),
+       (009, "Apprentice Butcher", 35000, 0003),
+       (010, "Dairy Manager", 60000, 0004);
+       (011, "Dairy Associate & Stocking", 45000, 0004);
+       (012, "Deli Manager", 65000, 0005),
+       (013, "Deli Associate", 45000, 0005),
+       (014, "Grocery Manager", 70000, 0006),
+       (015, "Grocery Associate & Stocking", 45000, 0006),
+       (016, "Evening Operations Manager", 75000, 0006),
+       (017, "Night Crew - Stocking", 50000, 0006),
+       (018, "General Maintenance", 55000, 0007),
+       (019, "Janitorial Specialist", 40000, 0007),
+       (020, "Pharmacy Manager", 80000, 0008);
+       (021, "Pharmacist", 78000, 0008);
+       (022, "Pharmacy Clerk", 40000, 0008),
+       (023, "Produce Manager", 70000, 0009),
+       (024, "Produce Associate", 45000, 0009),
+       (025, "Retail Manager", 70000, 0010),
+       (026, "Service Leader", 55000, 0010),
+       (027, "Cashier", 35000, 0010);
 
 INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
-VALUES (1, "Charles", "Johnson", );
+VALUES (1, "Charles", "Johnson", 001),
+       (2, "Paul", "Provo", 002, 1),
+       (3, "Andy", "Williams", 002, 1),
+       (4, "Ryan", "Menroe", 003, 1),
+       (5, "Matthew", "Coffey", 004, 1),
+       (6, "katherine", "Flores", 005, 2),
+       (7, "Don", "Harkins", 006, 6),
+       (8, "Duane", "Carr", 006, 6),
+       (9, "Victoria", "Gentile", 007, 2),
+       (10, "Ryan", "Naughton", 008, 9),
+       (11, "Mike", "Saraka", 008, 9),
+       (12, "Timothy", "Miles", 009, 10),
+       (13, "Elizabeth", "Hagerman", 010, 2),
+       (14, "Margaret", "Godfrey", 011, 13),
+       (15, "Timothy", "Schofield", 011, 13),
+       (16, "Robert", "LaBonte", 012, 2),
+       (17, "Christopher", "Matassa", 013, 16),
+       (18, "Amanda", "Stikeman", 013, 16),
+       (19, "Anthony", "Messina", 013, 16),
+       (20, "Zackery", "Bell", 014, 2),
+       (21, "Patrtick", "Linehan", 015, 20),
+       (22, "Angelo", "Barbieri", 015, 20),
+       (23, "Wilfred", "Tapley", 015, 20),
+       (24, "Tyler", "Angle", 015, 20),
+       (25, "David", "Sexton", 015, 20),
+       (26, "Carrie", "Tazbir", 016, 3),
+       (27, "Harry", "Hawkins", 017, 26),
+       (28, "Cheryl", "Hoffman", 017, 26),
+       (29, "Peter", "Kane", 017, 26),
+       (30, "Kevin", "O'Rourke", 018, 3),
+       (31, "Gary", "Gross", 019, 30),
+       (32, "Johnathan", "Lambertson", 019, 30),
+       (33, "Conner", "Breslin", 020, 3),
+       (34, "Judy", "Murphy", 021, 33),
+       (35, "Mary", "Cogswell", 021, 33),
+       (36, "Carson", "Hallee", 022, 33),
+       (37, "Jackson", "Pollaro", 022, 33),
+       (38, "Joanne", "Coles", 023, 3),
+       (39, "Peter", "Waluk", 024, 38),
+       (40, "William", "Wyslick", 024, 38),
+       (41, "Andre", "Flores", 024, 38),
+       (42, "Edward", "Caron", 024, 38),
+       (43, "Ashley", "Mercier", 024, 38),
+       (44, "Melissa", "McDougal", 025, 3),
+       (45, "Tanner", "Chase", 026, 44),
+       (46, "Joshua", "Buxton", 026, 44),
+       (47, "Brooke", "Dorval", 027, 44),
+       (48, "Sarah", "Lepinski", 027, 44),
+       (49, "Lani", "Buskey", 027, 44),
+       (50, "Tim", "Cain", 027, 44);
 
 
