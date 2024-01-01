@@ -1,5 +1,5 @@
 INSERT INTO departments (id, department_name)
-VALUES (0001, "Administration");
+VALUES (0001, "Administration"),
        (0002, "Bakery"),
        (0003, "Butchery"),
        (0004, "Dairy"),
@@ -11,7 +11,7 @@ VALUES (0001, "Administration");
        (0010, "Sales");
 
 INSERT INTO roles (id, role_title, role_salary, department_id)
-VALUES (001, "Store Manager", 100000, 0001);
+VALUES (001, "Store Manager", 100000, 0001),
        (002, "Assistant Store Manager", 85000, 0001),
        (003, "Finances Manager", 80000, 0001),
        (004, "Human Resources Manager", 80000, 0001),
@@ -20,8 +20,8 @@ VALUES (001, "Store Manager", 100000, 0001);
        (007, "Meats Manager", 70000, 0003),
        (008, "Butcher", 60000, 0003),
        (009, "Apprentice Butcher", 35000, 0003),
-       (010, "Dairy Manager", 60000, 0004);
-       (011, "Dairy Associate & Stocking", 45000, 0004);
+       (010, "Dairy Manager", 60000, 0004),
+       (011, "Dairy Associate & Stocking", 45000, 0004),
        (012, "Deli Manager", 65000, 0005),
        (013, "Deli Associate", 45000, 0005),
        (014, "Grocery Manager", 70000, 0006),
@@ -30,8 +30,8 @@ VALUES (001, "Store Manager", 100000, 0001);
        (017, "Night Crew - Stocking", 50000, 0006),
        (018, "General Maintenance", 55000, 0007),
        (019, "Janitorial Specialist", 40000, 0007),
-       (020, "Pharmacy Manager", 80000, 0008);
-       (021, "Pharmacist", 78000, 0008);
+       (020, "Pharmacy Manager", 80000, 0008),
+       (021, "Pharmacist", 78000, 0008),
        (022, "Pharmacy Clerk", 40000, 0008),
        (023, "Produce Manager", 70000, 0009),
        (024, "Produce Associate", 45000, 0009),
@@ -40,7 +40,7 @@ VALUES (001, "Store Manager", 100000, 0001);
        (027, "Cashier", 35000, 0010);
 
 INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
-VALUES (1, "Charles", "Johnson", 001),
+VALUES (1, "Charles", "Johnson", 001, NULL),
        (2, "Paul", "Provo", 002, 1),
        (3, "Andy", "Williams", 002, 1),
        (4, "Ryan", "Menroe", 003, 1),
