@@ -18,8 +18,8 @@ function main() {
     inquirer
         .prompt(questions[0])
         .then(data => {
-            if (data.init === 'View all departments') {
-                db.query('SELECT * FROM departments', (error, result) => {
+            if (data.init[0] === 'View all departments') {
+                db.query('SELECT departments.id, departments.department_name FROM departments', (error, result) => {
                     if (error) {
                         return console.log(error);
                     } else {
@@ -28,7 +28,7 @@ function main() {
                         main();
                     }
                 })
-            } else if (data.init === 'View all roles') {
+            } else if (data.init[0] === 'View all roles') {
                 db.query('SELECT * FROM roles', (error, result) => {
                     if (error) {
                         return console.log(error);
@@ -38,7 +38,7 @@ function main() {
                         main();
                     }
                 })
-            } else if (data.init === 'View all employees') {
+            } else if (data.init[0] === 'View all employees') {
                 db.query('SELECT * FROM employees', (error, result) => {
                     if (error) {
                         return console.log(error);
@@ -48,10 +48,12 @@ function main() {
                         main();
                     }
                 })
-            } else if (data.init === 'Add department') {
+            } else if (data.init[0] === 'Add department') {
                 inquirer
                 .prompt(questions[1])
                 .then(data => {
+                    console.log(data);
+                    console.log(typeof data);
                     db.query('INSERT INTO departments (department_name) VALUES ('+data.new_department+')', (error, result) => {
                         if (error) {
                             return console.log(error);
@@ -62,7 +64,7 @@ function main() {
                         }
                     })
                 }) 
-            } else if (data.init === 'Add role') {
+            } else if (data.init[0] === 'Add role') {
                 inquirer
                 .prompt(questions[2, 3, 4])
                 .then(data => {
@@ -76,9 +78,10 @@ function main() {
                         }
                     })
                 }) 
-            } else if (data.init === 'Add employee') {
+            } else if (data.init[0] === 'Add employee') {
                 inquirer
-                .prompt(questions[5, 6, 7, 8])
+                .prompt(questions[5])
+                .then()
                 .then(data => {
                     db.query('INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('+data.first_name+data.last_name+data.role_id+data.manager_id+')', (error, result) => {
                         if (error) {
@@ -90,7 +93,7 @@ function main() {
                         }
                     })
                 }) 
-            } else if (data.init === 'Update employee role') {
+            } else if (data.init[0] === 'Update employee role') {
                 inquirer
                 .prompt(questions[9, 10])
                 .then(data => {

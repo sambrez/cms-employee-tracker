@@ -1,3 +1,5 @@
+USE company_db;
+
 INSERT INTO departments (id, department_name)
 VALUES (0001, "Administration"),
        (0002, "Bakery"),
