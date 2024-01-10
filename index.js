@@ -67,8 +67,6 @@ function main() {
                     inquirer
                         .prompt(newRole, result)
                         .then(data => {
-                            console.log(data);
-                            console.log(typeof data);
                             db.query('INSERT INTO roles (role_title, role_salary, department_id) VALUES (?, ?, ?)', [data.new_role, data.salary, data.department_id], (error, result) => {
                                 if (error) {
                                     return console.log(error);
