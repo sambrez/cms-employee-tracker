@@ -1,4 +1,4 @@
-const questions = [
+const question = [
     {
         type: 'checkbox',
         name: 'init',
@@ -21,26 +21,32 @@ const questions = [
                 return true;
             }
         }
-    },
+    }
+];
+
+const newDepartment = [
     {
         type: 'input',
         name: 'new_department',
-        message: 'What is the name of the department?',
+        message: 'What is the name of the new department?',
         validate: function(new_department) {
-            if (new_department === null) {
+            if (new_department === '') {
                 return 'Error: must provide department name.';
             } else {
                 return true;
             }
         }
     },
+];
+
+const newRole = [
     {
         type: 'input',
         name: 'new_role',
-        message: 'What is the name of the role?',
+        message: 'What is the name of the new role?',
         validate: function(new_role) {
             if (new_role === null) {
-                return 'Error: must provide department name.';
+                return 'Error: must provide a role name.';
             } else {
                 return true;
             }
@@ -51,7 +57,7 @@ const questions = [
         name: 'salary',
         message: 'What is the salary of this role?',
         validate: function(salary) {
-            if (salary === null) {
+            if (salary === '') {
                 return 'Error: must provide department name.';
             } else {
                 return true;
@@ -59,23 +65,20 @@ const questions = [
         }
     },
     {
-        type: 'checkbox',
+        type: 'input',
         name: 'department_id',
-        message: 'Which department does this role belong to?',
-        choices: function() {
-            let arr = [];
-            // for loop over departments
-        },
+        message: 'What is the department ID for this new role?',
         validate: function(department_id) {
-            if (department_id.length > 1) {
-                return 'Error: Please select a single department.';
-            } else if (department_id.length < 1) {
-                return 'Error: Please select a department.';
-            } else {
+            if (department_id) {
                 return true;
+            } else {
+                return 'Error: Please enter a department.';
             }
         }
     },
+];
+
+const newEmployee = [
     {
         type: 'input',
         name: 'first_name',
@@ -101,60 +104,64 @@ const questions = [
         }
     },
     {
-        type: 'checkbox',
+        type: 'input',
         name: 'role_id',
-        message: "What's the employee's role?",
-        choices: function() {
-            let arr = [];
-            // for loop over role
-        },
+        message: "Please enter the role ID",
         validate: function(role_id) {
-            if (role_id.length > 1) {
-                return 'Error: Please select a single role.';
-            } else if (role_id.length < 1) {
-                return 'Error: Please select a role.';
-            } else {
+            if (role_id) {
                 return true;
-            }
+            } else {
+                return 'Error: Please enter a role ID.';
+            } 
         }
     },
     {
         type: 'input',
-        name: 'manager',
-        message: "Which manager does this employee report to?",
+        name: 'manager_id',
+        message: "Please enter the reporting manager's ID?",
+        validate: function(manager_id) {
+            if (manager_id) {
+                return true;
+            } else {
+                return 'Error: Please enter a role ID.';
+            } 
+        }
     },
+];
+    
+const updateEmployee = [
     {
         type: 'input',
         name: 'employee_id',
-        message: "Enter the employee id.",
+        message: "What is the employee's ID?",
         validate: function(employee_id) {
-            for (let i = 0; i < db.employees.id; i++) {
-                if (employee_id === db.employee_id[i]) {
-                 return true;
-                } else {
-                    return 'Error: employee not found.'
-                }
+            if (employee_id) {
+                return true;
+            } else {
+                return 'Error: Please enter an employee ID.';
             }
         }
     },
     {
-        type: 'checkbox',
+        type: 'input',
         name: 'updated_role',
-        message: "What's the employee's new role?",
-        choices: function() {
-            let arr = [];
-            // for loop over roles
-        },
+        message: "What's the employee's new role ID?",
         validate: function(updated_role) {
-            if (updated_role.length > 1) {
-                return 'Error: Please select a single role.';
-            } else if (updated_role.length < 1) {
-                return 'Error: Please select a role.';
-            } else {
+            if (updated_role) {
                 return true;
+            } else {
+                return 'Error: Please enter a role ID.';
             }
         }
     },
 ];
+ 
+    
+    
+    
+    
+    
+    
 
-module.exports = questions;
+
+module.exports = [question, newDepartment, newRole, newEmployee, updateEmployee];

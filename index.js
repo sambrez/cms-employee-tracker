@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const questions = require('./library/questions');
+const [question, newDepartment, newRole, newEmployee, updateEmployee] = require('./library/questions');
 
 const db = mysql.createConnection(
     {
@@ -16,7 +16,7 @@ const db = mysql.createConnection(
 
 function main() {
     inquirer
-        .prompt(questions[0])
+        .prompt(question)
         .then(data => {
             if (data.init[0] === 'View all departments') {
                 db.query('SELECT departments.id, departments.department_name FROM departments', (error, result) => {
@@ -50,64 +50,62 @@ function main() {
                 })
             } else if (data.init[0] === 'Add department') {
                 inquirer
-                .prompt(questions[1])
-                .then(data => {
-                    console.log(data);
-                    console.log(typeof data);
-                    db.query('INSERT INTO departments (department_name) VALUES ('+data.new_department+')', (error, result) => {
-                        if (error) {
-                            return console.log(error);
-                        } else {
-                            console.log('A new department has been added.');
-                            console.table(result);
-                            main();
-                        }
+                    .prompt(newDepartment)
+                    .then(data => {
+                        db.query('INSERT INTO departments (department_name) VALUES (?)', [data.new_department], (error, result) => {
+                            if (error) {
+                                return console.log(error);
+                            } else {
+                                console.log('A new department has been added.');
+                                main();
+                            }
+                        })
                     })
-                }) 
             } else if (data.init[0] === 'Add role') {
-                inquirer
-                .prompt(questions[2, 3, 4])
-                .then(data => {
-                    db.query('INSERT INTO roles (role_title, role_salary, department_id) VALUES ('+data.role_title+data.role_salary+data.department_id+')', (error, result) => {
-                        if (error) {
-                            return console.log(error);
-                        } else {
-                            console.log('A new role has been added.');
-                            console.table(result);
-                            main();
-                        }
-                    })
-                }) 
+                db.query('SELECT (id) FROM departments', (error, result) => {
+                    if (error) return error;
+                    inquirer
+                        .prompt(newRole, result)
+                        .then(data => {
+                            console.log(data);
+                            console.log(typeof data);
+                            db.query('INSERT INTO roles (role_title, role_salary, department_id) VALUES (?, ?, ?)', [data.new_role, data.salary, data.department_id], (error, result) => {
+                                if (error) {
+                                    return console.log(error);
+                                } else {
+                                    console.log('A new role has been added.');
+                                    main();
+                                }
+                            })
+                        })
+                })
             } else if (data.init[0] === 'Add employee') {
                 inquirer
-                .prompt(questions[5])
-                .then()
-                .then(data => {
-                    db.query('INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('+data.first_name+data.last_name+data.role_id+data.manager_id+')', (error, result) => {
-                        if (error) {
-                            return console.log(error);
-                        } else {
-                            console.log('A new employee has been added.');
-                            console.table(result);
-                            main();
-                        }
+                    .prompt(newEmployee)
+                    .then(data => {
+                        db.query('INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [data.first_name, data.last_name, data.role_id, data.manager_id], (error, result) => {
+                            if (error) {
+                                return console.log(error);
+                            } else {
+                                console.log('A new employee has been added.');
+                                main();
+                            }
+                        })
                     })
-                }) 
             } else if (data.init[0] === 'Update employee role') {
-                inquirer
-                .prompt(questions[9, 10])
-                .then(data => {
-                    db.query('UPDATE employees SET role_id = ('+data.updated_role+') WHERE employee_id = ('+data.employee_id+')', (error, result) => {
-                        if (error) {
-                            return console.log(error);
-                        } else {
-                            console.log('Employee has been updated.');
-                            console.table(result);
-                            main();
-                        }
-                    })
-                })
-            };
+                    inquirer
+                        .prompt(updateEmployee)
+                        .then(data => {
+                            db.query('UPDATE employees SET role_id = (?) WHERE id = (?)', [data.updated_role, data.employee_id], (error, result) => {
+                                if (error) {
+                                    return console.log(error);
+                                } else {
+                                    console.log('Employee has been updated.');
+                                    main();
+                                }
+                            })
+                        })
+            }
         })
         .catch((error) => {
             if (error) {
